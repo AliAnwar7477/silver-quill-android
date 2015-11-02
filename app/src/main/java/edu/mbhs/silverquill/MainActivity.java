@@ -1,6 +1,8 @@
 package edu.mbhs.silverquill;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -15,12 +17,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
-
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    final int ISSUES = 1;
+
+    private static ListView issuesListView;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -45,15 +52,26 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2196F3")));
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+        if(position == ISSUES) {
+            // update the main content by replacing fragments
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, IssuesFragment.newInstance(position + 1))
+                    .commit();
+        }
+        else {
+            // update the main content by replacing fragments
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                    .commit();
+        }
     }
 
     public void onSectionAttached(int number) {
@@ -136,6 +154,118 @@ public class MainActivity extends ActionBarActivity
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
+        }
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            ((MainActivity) activity).onSectionAttached(
+                    getArguments().getInt(ARG_SECTION_NUMBER));
+        }
+    }
+
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+    public static class IssuesFragment extends Fragment {
+
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        private int mCurrentSelectedPosition;
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static IssuesFragment newInstance(int sectionNumber) {
+            IssuesFragment fragment = new IssuesFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        public IssuesFragment() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            issuesListView = (ListView) inflater.inflate(
+                    R.layout.fragment_issues, container, false);
+            issuesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    selectItem(position);
+                }
+            });
+
+            issuesListView.setAdapter(new IssueList(
+                    ((ActionBarActivity) getActivity()),
+                    new String[]{
+                            getString(R.string.issue_1),
+                            getString(R.string.issue_2),
+                            getString(R.string.issue_3),
+                            getString(R.string.issue_4),
+                            getString(R.string.issue_5),
+                            getString(R.string.issue_6),
+                            getString(R.string.issue_7),
+                            getString(R.string.issue_8),
+                            getString(R.string.issue_9),
+                            getString(R.string.issue_10),
+                            getString(R.string.issue_11),
+                            getString(R.string.issue_12),
+                    },
+                    new String[]{
+                            getString(R.string.issue_1_date),
+                            getString(R.string.issue_2_date),
+                            getString(R.string.issue_3_date),
+                            getString(R.string.issue_4_date),
+                            getString(R.string.issue_5_date),
+                            getString(R.string.issue_6_date),
+                            getString(R.string.issue_7_date),
+                            getString(R.string.issue_8_date),
+                            getString(R.string.issue_9_date),
+                            getString(R.string.issue_10_date),
+                            getString(R.string.issue_11_date),
+                            getString(R.string.issue_12_date),
+                    },
+                    new Integer[]{
+                            getResources().getIdentifier("rhapsody", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("terraincognita", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("abstraction", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("inktrack", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("aurora", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("sample_thumbnail", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("sample_thumbnail", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("sample_thumbnail", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("sample_thumbnail", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("sample_thumbnail", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("sample_thumbnail", "drawable", getActivity().getPackageName()),
+                            getResources().getIdentifier("sample_thumbnail", "drawable", getActivity().getPackageName())
+                    }));
+
+            issuesListView.setItemChecked(mCurrentSelectedPosition, true);
+            return issuesListView;
+        }
+
+        private void selectItem(int position) {
+            mCurrentSelectedPosition = position;
+            /**
+            if (mDrawerListView != null) {
+                mDrawerListView.setItemChecked(position, true);
+            }
+            if (mDrawerLayout != null) {
+                mDrawerLayout.closeDrawer(mFragmentContainerView);
+            }
+            if (mCallbacks != null) {
+                mCallbacks.onNavigationDrawerItemSelected(position);
+            }
+             */
         }
 
         @Override

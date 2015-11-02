@@ -1,9 +1,35 @@
 <resources>
     <string name="app_name">Silver Quill</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Silver Quill</string>
+    <string name="title_section2">Issues</string>
+    <string name="title_section3">About</string>
+
+    <string name="issue_1">Rhapsody</string>
+    <string name="issue_2">Terra Incognita</string>
+    <string name="issue_3">Abstraction</string>
+    <string name="issue_4">Ink Track</string>
+    <string name="issue_5">Aurora</string>
+    <string name="issue_6">Issue 6</string>
+    <string name="issue_7">Issue 7</string>
+    <string name="issue_8">Issue 8</string>
+    <string name="issue_9">Issue 9</string>
+    <string name="issue_10">Issue 10</string>
+    <string name="issue_11">Issue 11</string>
+    <string name="issue_12">Issue 12</string>
+
+    <string name="issue_1_date">2015</string>
+    <string name="issue_2_date">2014</string>
+    <string name="issue_3_date">2013</string>
+    <string name="issue_4_date">2012</string>
+    <string name="issue_5_date">2011</string>
+    <string name="issue_6_date">2010</string>
+    <string name="issue_7_date">2009</string>
+    <string name="issue_8_date">2008</string>
+    <string name="issue_9_date">2007</string>
+    <string name="issue_10_date">2006</string>
+    <string name="issue_11_date">2005</string>
+    <string name="issue_12_date">2003</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
