@@ -1,6 +1,7 @@
 package edu.mbhs.silverquill;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -15,10 +16,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import net.sf.andpdf.pdfviewer.PdfViewerActivity;
+
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     final int ISSUES = 1;
+    final int ABOUT = 2;
 
     private static ListView issuesListView;
 
@@ -58,6 +62,11 @@ public class MainActivity extends ActionBarActivity
                     .replace(R.id.container, IssuesFragment.newInstance(position + 1))
                     .commit();
         }
+        else if(position == ABOUT){
+            Intent intent = new Intent(this, PDFViewer.class);
+            intent.putExtra(PdfViewerActivity.EXTRA_PDFFILENAME, "/storage/emulated/0/Download/77_Trap.pdf");
+            startActivity(intent);
+        }
         else {
             // update the main content by replacing fragments
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -86,6 +95,12 @@ public class MainActivity extends ActionBarActivity
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+    }
+
+    public void openPDF(View v){
+        Intent intent = new Intent(this, PDFViewer.class);
+        intent.putExtra(PdfViewerActivity.EXTRA_PDFFILENAME, "/storage/emulated/0/Download/77_Trap.pdf");
+        startActivity(intent);
     }
 
 
@@ -170,8 +185,6 @@ public class MainActivity extends ActionBarActivity
 
         private int mCurrentSelectedPosition;
 
-        private int issues;
-
         private String[] issueNames;
         private String[] issueDates;
         private Integer[] thumbnails;
@@ -194,8 +207,6 @@ public class MainActivity extends ActionBarActivity
         private void readFromDatabase(){
 
             //For now issue names, dates and thumbnails are hardcoded but eventually they'll be read from the database
-
-            issues = 12;
 
             issueNames = new String[]{
                     getString(R.string.issue_1),
@@ -241,8 +252,6 @@ public class MainActivity extends ActionBarActivity
                     getResources().getIdentifier("sample_thumbnail", "drawable", getActivity().getPackageName()),
                     getResources().getIdentifier("sample_thumbnail", "drawable", getActivity().getPackageName())
             };
-
-
         }
 
         @Override
@@ -268,10 +277,10 @@ public class MainActivity extends ActionBarActivity
 
         private void selectItem(int position) {
             mCurrentSelectedPosition = position;
-            /**
-            if (mDrawerListView != null) {
-                mDrawerListView.setItemChecked(position, true);
+            if (issuesListView != null) {
+                issuesListView.setItemChecked(position, true);
             }
+            /**
             if (mDrawerLayout != null) {
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
             }
@@ -279,6 +288,12 @@ public class MainActivity extends ActionBarActivity
                 mCallbacks.onNavigationDrawerItemSelected(position);
             }
              */
+
+            if(position == 0){
+                Intent intent = new Intent(getActivity(), PDFViewer.class);
+                intent.putExtra(PdfViewerActivity.EXTRA_PDFFILENAME, "/storage/emulated/0/Download/77_Trap.pdf");
+                startActivity(intent);
+            }
         }
 
         @Override
