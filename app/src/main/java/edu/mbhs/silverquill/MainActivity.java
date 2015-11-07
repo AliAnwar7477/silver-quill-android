@@ -16,9 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-//import net.sf.andpdf.pdfviewer.PdfViewerActivity;
-
-//import edu.mbhs.silverquill.deprecated.PDFViewer;
+import net.sf.andpdf.pdfviewer.PdfViewerActivity;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -65,11 +63,9 @@ public class MainActivity extends ActionBarActivity
                     .commit();
         }
         else if(position == ABOUT){
-            /*
             Intent intent = new Intent(this, PDFViewer.class);
             intent.putExtra(PdfViewerActivity.EXTRA_PDFFILENAME, "/storage/emulated/0/Download/77_Trap.pdf");
             startActivity(intent);
-            */
         }
         else {
             // update the main content by replacing fragments
@@ -101,13 +97,11 @@ public class MainActivity extends ActionBarActivity
         actionBar.setTitle(mTitle);
     }
 
-    /*
     public void openPDF(View v){
         Intent intent = new Intent(this, PDFViewer.class);
         intent.putExtra(PdfViewerActivity.EXTRA_PDFFILENAME, "/storage/emulated/0/Download/77_Trap.pdf");
         startActivity(intent);
     }
-     */
 
 
     @Override
@@ -296,11 +290,9 @@ public class MainActivity extends ActionBarActivity
              */
 
             if(position == 0){
-                /*
                 Intent intent = new Intent(getActivity(), PDFViewer.class);
                 intent.putExtra(PdfViewerActivity.EXTRA_PDFFILENAME, "/storage/emulated/0/Download/77_Trap.pdf");
                 startActivity(intent);
-                */
             }
         }
 

@@ -1,17 +1,12 @@
-/*
-package edu.mbhs.silverquill.deprecated;
+package edu.mbhs.silverquill;
 
 import android.os.Bundle;
 
 import net.sf.andpdf.pdfviewer.PdfViewerActivity;
 
-import edu.mbhs.silverquill.R;
-*/
-
 /**
  * Created by Ali on 11/2/2015.
  */
-/*
 public class PDFViewer extends PdfViewerActivity
 {
 
@@ -61,4 +56,3 @@ public class PDFViewer extends PdfViewerActivity
         return R.id.pagenum_edit;
     }
 }
-*/
